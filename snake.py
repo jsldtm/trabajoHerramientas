@@ -5,20 +5,22 @@ Exercises
 1. How do you make the snake faster or slower?
 2. How can you make the snake go around the edges? (Not implemented here)
 3. How would you move the food? (Implemented) ## ya realizado
-4. Change the snake to respond to mouse clicks. (Not implemented here)
+4. Change the snake to respond to mouse clicks. (Not implemented here) ## ya realizado
 """
 
-from random import randrange
+from random import randrange, choice
 from turtle import *
 
 from freegames import square, vector
 
+# Definir los colores posibles (sin contar 'rojo')
+colors = ['blue', 'green', 'yellow', 'purple', 'orange']
+
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
-game_width = 400  # Define game width
-game_height = 400  # Define game height
-
+game_width = 400  # Definir el ancho de la pantalla de juego
+game_height = 400  # Definir la altura de la pantalla de juego
 
 def change(x, y):
     """Change snake direction."""
@@ -32,7 +34,9 @@ def inside(head, width=game_width, height=game_height):
 
 
 def move_food():
+    
     """Mueve la comida a una posición aleatoria entre el área del juego."""
+    
     while True:
         # Se generan coordenadas aleatorias dentro del área del juego:
         new_food_x = randrange(-game_width // 20 + 1, game_width // 20 - 1) * 10
@@ -64,21 +68,29 @@ def move():
 
     snake.append(head)
 
+    food_color = choice(colors.copy())  # Copiar para evitar la modificación del Arreglo
+
     if head == food:
         print('Snake:', len(snake))
-        move_food()  # Se invoca la nueva funcion para generar una ‘nueva posición’
+        move_food()  # Generate new food position
+
+        ### Modificaciones de 'color de serpiente':
+        # Escoger un color aleatorio (del arreglo anterior 'colors')
+        snake_color = choice(colors)
+    
+
     else:
         snake.pop(0)
+        snake_color = choice(colors)  # Actualizar el color de la serpiente en cada 'movida'
 
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snake_color)
 
     square(food.x, food.y, 9, 'green')
     update()
     ontimer(move, 100)
-
 
 setup(game_width, game_height, 370, 0)
 hideturtle()
@@ -91,4 +103,3 @@ onkey(lambda: change(0, -10), 'Down')
 move_food()  # Se llama a la funcion 'move_food()' para generar una posición inicial (de la 'comida')
 move()
 done()
-
