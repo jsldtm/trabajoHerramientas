@@ -51,12 +51,42 @@ def circle(start, end):
 
 def rectangle(start, end):
     """Draw rectangle from start to end."""
-    pass  # TODO (not modified)
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Calcular el 'ancho' y la 'altura' partiendo de los extremos del movimiento del cursor
+    width = end.x - start.x
+    height = end.y - start.y
+
+    # Dibujar un rectánulo mediante 'giros' hacia la izquierda y derecha
+    for _ in range(2):
+        forward(width)
+        left(90)
+        forward(height)
+        left(90)
+
+    end_fill()
 
 
 def triangle(start, end):
     """Draw triangle from start to end."""
-    pass  # TODO (not modified)
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Calculate base and height based on start and end points
+    base = end.x - start.x
+    height = end.y - start.y
+
+    # Draw triangle using forward and left turns
+    for _ in range(3):
+        forward(base)
+        left(120)  # Angle for equilateral triangle
+
+    end_fill()
 
 
 def tap(x, y):
