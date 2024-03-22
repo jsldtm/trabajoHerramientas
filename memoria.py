@@ -1,9 +1,11 @@
+## Modificado por: Joaquin Saldarriaga
+
 from random import *
 from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+tiles = list(range(30)) * 2
 ## Modificación 1 a)  --- 
 
 # Agregar el tag 'taps' para registrar el número de clicks
@@ -63,7 +65,9 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        ## Modificación 2 a) ----
+        goto(x, y) 
+        ## Modificación 2 a) ----
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
