@@ -58,7 +58,15 @@ def move():
 
     # Modificar para la velocidad de los 'objetivos' (azules)
     for target in targets:
-        target.x -= 1 
+        target.x -= 1  # Modificar a la velocidad deseada
+        
+        ## Modificación 2 (reposicionar objetivos)
+
+        # Reposicionar los objetivos (azules) que salgan de la pantalla por el extremo derecho
+        if target.x < -200:
+            target.x = 200
+
+        ## Modificación 2 (reposicionar objetivos)
 
     if inside(ball):
         speed.y -= 0.5  # Aumenta la fuerza gravitacional del proyectil
@@ -73,13 +81,8 @@ def move():
 
     draw()
 
-    for target in targets:
-        if not inside(target):
-            return
-
     # Se incrementa la 'frecuencia de actualización' para una ancimación más fluida
     ontimer(move, 25)
-    
 
 
 setup(420, 420, 370, 0)
